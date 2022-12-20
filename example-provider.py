@@ -219,7 +219,7 @@ class Engine:
             self.threads = work["threads"]
             options_changed = True
         if self.hash != work["hash"]:
-            work["hash"] = 4096
+            work["hash"] = MEMORY
             self.setoption("Hash", work["hash"])
             self.hash = work["hash"]
             options_changed = True
@@ -271,6 +271,7 @@ class Engine:
 
 
 if __name__ == "__main__":
+    MEMORY = os.environ.get("MEMORY")
     logging.basicConfig(level=logging.DEBUG)
 
     parser = argparse.ArgumentParser(description=__doc__)
@@ -283,7 +284,7 @@ if __name__ == "__main__":
     parser.add_argument("--provider-secret", default=os.environ.get("PROVIDER_SECRET"), help="Optional fixed provider secret")
     parser.add_argument("--default-depth", type=int, default=25)
     parser.add_argument("--max-threads", type=int, default=multiprocessing.cpu_count(), help="Maximum number of available threads")
-    parser.add_argument("--max-hash", type=int, default=512, help="Maximum hash table size in MiB")
+    parser.add_argument("--max-hash", type=int, default=MEMORY, help="Maximum hash table size in MiB")
     parser.add_argument("--keep-alive", type=int, default=999999999, help="Number of seconds to keep an idle/unused engine process around")
 
     try:
