@@ -219,7 +219,7 @@ class Engine:
             self.threads = work["threads"]
             options_changed = True
         if self.hash != work["hash"]:
-            work["hash"] = 7500
+            work["hash"] = 4096
             self.setoption("Hash", work["hash"])
             self.hash = work["hash"]
             options_changed = True
