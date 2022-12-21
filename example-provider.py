@@ -281,7 +281,7 @@ if __name__ == "__main__":
     parser.add_argument("--provider-secret", default=os.environ.get("PROVIDER_SECRET"), help="Optional fixed provider secret")
     parser.add_argument("--default-depth", type=int, default=25)
     parser.add_argument("--max-threads", type=int, default=multiprocessing.cpu_count(), help="Maximum number of available threads")
-    parser.add_argument("--max-hash", type=int, default=130000, help="Maximum hash table size in MiB")
+    parser.add_argument("--max-hash", type=int, default=220000, help="Maximum hash table size in MiB")
     parser.add_argument("--keep-alive", type=int, default=999999, help="Number of seconds to keep an idle/unused engine process around")
 
     try:
