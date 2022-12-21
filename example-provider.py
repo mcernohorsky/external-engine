@@ -214,12 +214,10 @@ class Engine:
 
         options_changed = False
         if self.threads != work["threads"]:
-            work["threads"] = multiprocessing.cpu_count()
             self.setoption("Threads", work["threads"])
             self.threads = work["threads"]
             options_changed = True
         if self.hash != work["hash"]:
-            work["hash"] = MEMORY
             self.setoption("Hash", work["hash"])
             self.hash = work["hash"]
             options_changed = True
@@ -271,11 +269,10 @@ class Engine:
 
 
 if __name__ == "__main__":
-    MEMORY = os.environ.get("MEMORY")
     logging.basicConfig(level=logging.DEBUG)
 
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--name", default="Alpha 2", help="Engine name to register")
+    parser.add_argument("--name", default="GCP", help="Engine name to register")
     parser.add_argument("--engine", help="Shell command to launch UCI engine", required=True)
     parser.add_argument("--setoption", nargs=2, action="append", default=[], metavar=("NAME", "VALUE"), help="Set a custom UCI option")
     parser.add_argument("--lichess", default="https://lichess.org", help="Defaults to https://lichess.org")
@@ -284,8 +281,8 @@ if __name__ == "__main__":
     parser.add_argument("--provider-secret", default=os.environ.get("PROVIDER_SECRET"), help="Optional fixed provider secret")
     parser.add_argument("--default-depth", type=int, default=25)
     parser.add_argument("--max-threads", type=int, default=multiprocessing.cpu_count(), help="Maximum number of available threads")
-    parser.add_argument("--max-hash", type=int, default=MEMORY, help="Maximum hash table size in MiB")
-    parser.add_argument("--keep-alive", type=int, default=999999999, help="Number of seconds to keep an idle/unused engine process around")
+    parser.add_argument("--max-hash", type=int, default=130000, help="Maximum hash table size in MiB")
+    parser.add_argument("--keep-alive", type=int, default=999999, help="Number of seconds to keep an idle/unused engine process around")
 
     try:
         import argcomplete
